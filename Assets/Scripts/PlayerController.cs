@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ground"))
         {
+            Debug.Log("Collisionaste");
             isOnGround = true;
         }
         else 
@@ -55,6 +56,8 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Game Over");
                 gameOver = true;
+                playerAnim.SetBool("Death_b", true);
+                playerAnim.SetInteger("DeathType_int", 1);
             }
         }
     }
