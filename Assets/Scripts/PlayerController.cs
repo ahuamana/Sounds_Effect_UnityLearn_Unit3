@@ -24,14 +24,14 @@ public class PlayerController : MonoBehaviour
 
         Physics.gravity *= gravityModifier;
 
-
+        
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
         {
             //Impulse, It's a force mode which applies inmediatly
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
