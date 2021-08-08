@@ -24,14 +24,14 @@ public class PlayerController : MonoBehaviour
 
         Physics.gravity *= gravityModifier;
 
-
+        
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
         {
             //Impulse, It's a force mode which applies inmediatly
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ground"))
         {
+            Debug.Log("Collisionaste");
             isOnGround = true;
         }
         else 
@@ -55,6 +56,8 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Game Over");
                 gameOver = true;
+                playerAnim.SetBool("Death_b", true);
+                playerAnim.SetInteger("DeathType_int", 1);
             }
         }
     }
