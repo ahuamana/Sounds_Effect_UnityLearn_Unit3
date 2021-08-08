@@ -6,7 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     private Animator playerAnim;
+
     public ParticleSystem explosionParticle;
+    public ParticleSystem dirtyParticle;
+
     public float jumpForce = 10;
     public float gravityModifier;
     public bool isOnGround = true;
@@ -36,7 +39,7 @@ public class PlayerController : MonoBehaviour
             //Impulse, It's a force mode which applies inmediatly
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
-
+            dirtyParticle.Stop();    
             playerAnim.SetTrigger("Jump_trig");
         }
     }
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             Debug.Log("Collisionaste");
+            dirtyParticle.Play();
             isOnGround = true;
         }
         else 
@@ -61,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
                 explosionParticle.Play();
                 Debug.Log("Play particle");
+                dirtyParticle.Stop();
             }
         }
     }
